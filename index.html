@@ -121,9 +121,13 @@
   }
   .tab:hover:not(.active) { color: var(--text); background: rgba(255,255,255,0.03); }
 
-  /* PANELS */
+  /* PANELS & SMOOTH APPEARANCE */
   .panel { display: none; opacity: 0; transform: translateY(20px); transition: opacity 0.4s ease, transform 0.4s ease; }
   .panel.active { display: block; opacity: 1; transform: translateY(0); }
+
+  /* SMOOTH REVEAL BASE FIX */
+  .js-reveal { opacity: 0; transform: translateY(20px); }
+  .js-reveal.revealed { opacity: 1; transform: translateY(0); }
 
   /* CARDS */
   .card {
@@ -131,9 +135,8 @@
     border: 1px solid var(--border); border-radius: var(--radius);
     padding: 28px; box-shadow: var(--card-shadow);
     transition: transform 0.3s ease, border-color 0.3s ease;
-    opacity: 0; transform: translateY(20px);
   }
-  .card.revealed { opacity: 1; transform: translateY(0); transition: opacity 0.6s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1); }
+  .card.revealed { transition: opacity 0.6s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1); }
   .card:hover { border-color: rgba(255,255,255,0.15); }
   
   .card-title {
@@ -151,9 +154,8 @@
     background: var(--surface-solid); border: 1px solid var(--border);
     border-radius: var(--radius); padding: 24px; position: relative; overflow: hidden;
     transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
-    opacity: 0; transform: translateY(20px);
   }
-  .stat-card.revealed { opacity: 1; transform: translateY(0); transition: opacity 0.6s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1); }
+  .stat-card.revealed { transition: opacity 0.6s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1); }
   .stat-card:hover { border-color: rgba(0,229,195,0.4); transform: translateY(-4px); box-shadow: 0 12px 30px rgba(0,229,195,0.1); }
   .stat-card .accent-line { position: absolute; top: 0; left: 0; right: 0; height: 3px; border-radius: 3px 3px 0 0; }
   .stat-card .label { font-size: 12px; color: var(--muted); margin-bottom: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
@@ -210,9 +212,8 @@
     border: 1px solid rgba(0,229,195,0.2); border-radius: var(--radius); padding: 40px;
     text-align: center; position: relative; overflow: hidden; margin-bottom: 20px;
     box-shadow: 0 16px 40px rgba(0,0,0,0.4), inset 0 0 40px rgba(0,229,195,0.05);
-    opacity: 0; transform: translateY(20px);
   }
-  .networth-hero.revealed { opacity: 1; transform: translateY(0); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .networth-hero.revealed { transition: opacity 0.6s ease, transform 0.6s ease; }
   .networth-hero::before {
     content: ''; position: absolute; width: 500px; height: 500px;
     background: radial-gradient(circle, rgba(0,229,195,0.1) 0%, transparent 70%);
@@ -246,9 +247,8 @@
   .goal-card {
     background: var(--surface-solid); border-radius: 16px; padding: 24px; margin-bottom: 16px;
     border: 1px solid var(--border); transition: all 0.3s ease;
-    opacity: 0; transform: translateY(20px);
   }
-  .goal-card.revealed { opacity: 1; transform: translateY(0); transition: opacity 0.5s ease, transform 0.5s ease; }
+  .goal-card.revealed { transition: opacity 0.5s ease, transform 0.5s ease; }
   .goal-card:hover { border-color: rgba(0,229,195,0.3); transform: translateY(-2px); box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
   .goal-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px; }
   .goal-name { font-family: 'Syne', sans-serif; font-size: 18px; font-weight: 700; color: #fff; }
@@ -265,9 +265,8 @@
     display: flex; gap: 32px; align-items: center; padding: 36px;
     background: linear-gradient(135deg, rgba(14,22,41,0.8), rgba(22,32,64,0.6));
     border: 1px solid var(--border); border-radius: var(--radius); margin-bottom: 24px;
-    opacity: 0; transform: translateY(20px);
   }
-  .score-section.revealed { opacity: 1; transform: translateY(0); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .score-section.revealed { transition: opacity 0.6s ease, transform 0.6s ease; }
   .score-ring-wrap { position: relative; width: 160px; height: 160px; flex-shrink: 0; }
   .score-ring-wrap canvas { position: absolute; top: 0; left: 0; }
   .score-center { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); text-align: center; }
@@ -287,9 +286,9 @@
   .tip-card {
     background: linear-gradient(135deg, rgba(22,32,64,0.6), rgba(14,22,41,0.8));
     border: 1px solid var(--border); border-radius: 16px; padding: 24px;
-    transition: all 0.3s ease; opacity: 0; transform: translateY(20px);
+    transition: all 0.3s ease; 
   }
-  .tip-card.revealed { opacity: 1; transform: translateY(0); transition: opacity 0.5s ease, transform 0.5s ease; }
+  .tip-card.revealed { transition: opacity 0.5s ease, transform 0.5s ease; }
   .tip-card:hover { border-color: rgba(0,229,195,0.3); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.4); }
   .tip-content h4 { font-family: 'Syne', sans-serif; font-size: 16px; font-weight: 700; margin-bottom: 8px; color: #fff; }
   .tip-content p { font-size: 14px; color: var(--muted); line-height: 1.6; }
@@ -352,7 +351,6 @@
 
   <header>
     <div class="logo-container">
-      
       <img src="logo.png" alt="Fintrix Logo" width="64" height="64" style="object-fit: contain; filter: drop-shadow(0px 8px 12px rgba(0, 229, 195, 0.15)); border-radius: 8px;">
       
       <div class="logo-text-group">
@@ -424,8 +422,7 @@
     <div class="card js-reveal">
       <div class="card-title">Le saviez-vous ?</div>
       <div id="rotating-tip" class="tip-card" style="border:none;padding:0;background:transparent;">
-        <div class="tip-content"><h4>La règle 50/30/20</h4><p>Allouez 50% de vos revenus aux besoins essentiels, 30% aux dépenses personnelles et 20% à l'épargne. C'est le point de départ idéal pour structurer ses finances.</p></div>
-      </div>
+        </div>
     </div>
   </div>
 
@@ -579,16 +576,16 @@
 
         <div class="divider"></div>
         <div class="card-title">Valorisation à terme</div>
-        <div class="stat-card" style="margin-bottom:12px; transform:none; opacity:1;">
+        <div class="stat-card" style="margin-bottom:12px;">
           <div class="label">Capital Final Estimé</div>
           <div class="value pos" id="inv-final">—</div>
         </div>
         <div class="grid-2" style="margin-bottom:0; gap:12px;">
-          <div class="stat-card" style="padding:16px; transform:none; opacity:1;">
+          <div class="stat-card" style="padding:16px;">
             <div class="label" style="font-size:10px;">Total Investi</div>
             <div style="font-size:18px;font-weight:800;font-family:'Syne'" id="inv-invested">—</div>
           </div>
-          <div class="stat-card" style="padding:16px; transform:none; opacity:1;">
+          <div class="stat-card" style="padding:16px;">
             <div class="label" style="font-size:10px;">Plus-value Latente</div>
             <div style="font-size:18px;font-weight:800;font-family:'Syne';color:var(--teal)" id="inv-gains">—</div>
           </div>
@@ -767,7 +764,7 @@ function switchTab(name) {
   document.querySelectorAll('.tab')[tabs[name]].classList.add('active');
   
   if (name === 'invest') { setTimeout(updateInvestChart, 50); }
-  if (name === 'score') { updateScore(); } // Corrigé : appel direct
+  if (name === 'score') { updateScore(); }
   if (name === 'dashboard') { updateDashboard(); }
   
   resetReveals(panelId);
@@ -942,11 +939,7 @@ function renderGoals() {
     const remaining = g.target - g.current; const eta = g.monthly > 0 ? Math.ceil(remaining / g.monthly) : null;
     const barColor = pct >= 100 ? 'var(--teal)' : pct >= 50 ? 'var(--gold)' : 'var(--coral)';
     const etaText = pct >= 100 ? 'Financement Sécurisé' : eta ? `Délai Projeté : ~${eta} mois` : 'Horizon indéterminé';
-    return `<div class="goal-card js-reveal">
-      <div class="goal-header"><div><div class="goal-name">${g.name}</div><div class="goal-meta">${g.cat} • <span class="tag ${pColors[g.priority]}" style="font-size:10px; padding: 2px 8px;">${pLabels[g.priority]}</span></div></div><div class="goal-amount"><div class="current">${fmt(g.current)}</div><div class="target">Cible : ${fmt(g.target)}</div></div></div>
-      <div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:${pct}%;background:${barColor}; box-shadow: 0 0 10px ${barColor};"></div></div>
-      <div class="goal-footer"><span class="goal-pct" style="color:${barColor}">Complétion : ${pct}%</span><span class="goal-eta">${etaText}</span><div style="display:flex;gap:8px"><button class="btn btn-ghost" style="padding:6px 14px;font-size:12px" onclick="addToGoal(${i})">Ajuster Allocation</button><button class="btn btn-danger" style="padding:6px 14px;font-size:12px" onclick="removeGoal(${i})">Archiver</button></div></div>
-    </div>`;
+    return `<div class="goal-card js-reveal"><div class="goal-header"><div><div class="goal-name">${g.name}</div><div class="goal-meta">${g.cat} • <span class="tag ${pColors[g.priority]}" style="font-size:10px; padding: 2px 8px;">${pLabels[g.priority]}</span></div></div><div class="goal-amount"><div class="current">${fmt(g.current)}</div><div class="target">Cible : ${fmt(g.target)}</div></div></div><div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:${pct}%;background:${barColor}; box-shadow: 0 0 10px ${barColor};"></div></div><div class="goal-footer"><span class="goal-pct" style="color:${barColor}">Complétion : ${pct}%</span><span class="goal-eta">${etaText}</span><div style="display:flex;gap:8px"><button class="btn btn-ghost" style="padding:6px 14px;font-size:12px" onclick="addToGoal(${i})">Ajuster Allocation</button><button class="btn btn-danger" style="padding:6px 14px;font-size:12px" onclick="removeGoal(${i})">Archiver</button></div></div></div>`;
   }).join('');
   initRevealer();
 }
@@ -983,7 +976,6 @@ function computeScore() {
 function updateScore() {
   const sc = computeScore(); const score = sc.total;
   
-  // Animation du compteur
   const display = document.getElementById('score-display');
   let currentVal = parseInt(display.textContent) || 0; const step = score > currentVal ? 1 : -1;
   const timer = setInterval(() => {
@@ -1018,42 +1010,33 @@ function updateScore() {
     return `<div class="criteria-item"><div class="criteria-label">${c.label}<div style="font-size:11px;color:var(--muted);margin-top:2px;">${c.detail}</div></div><div class="criteria-bar"><div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:${pct}%;background:${barColor}; box-shadow: 0 0 8px ${barColor};"></div></div></div><div class="criteria-score" style="color:${barColor}">${c.val}/${c.max}</div></div>`;
   }).join('');
 
-  // Recommendations
+  // Recommandations
   const recs = document.getElementById('recommendations');
   const tips = [];
-  if (sc.totalInc === 0) tips.push({ text: 'Afin d\'initier l\'analyse, veuillez enregistrer vos sources de revenus via l\'interface Budget.' });
-  if (sc.savingsRate < 0.1 && sc.totalInc > 0) tips.push({ text: 'Votre taux d\'épargne est inférieur à la norme recommandée de 10%. Une révision de vos postes de dépenses non-essentiels pourrait libérer une marge de manœuvre.' });
+  if (sc.totalInc === 0) {
+    tips.push({ text: 'Afin d\'initier l\'analyse, veuillez enregistrer vos sources de revenus via l\'interface Budget.' });
+  } else if (sc.savingsRate < 0.1) {
+    tips.push({ text: 'Votre taux d\'épargne est inférieur à la norme recommandée de 10%. Une révision de vos postes de dépenses non-essentiels pourrait libérer une marge de manœuvre.' });
+  }
+  
   if (sc.totalAssets < sc.totalExp * 3 && sc.totalExp > 0) tips.push({ text: `La constitution de votre fonds d'urgence n'est pas finalisée. L'objectif sécuritaire est estimé à ${fmt(sc.totalExp * 3)}.` });
   if (!state.goals.length) tips.push({ text: 'L\'absence de projets définis peut nuire à la discipline financière. La formalisation d\'un objectif cible améliore statistiquement la réussite de l\'épargne.' });
   if (sc.balance < 0 && sc.totalInc > 0) tips.push({ text: 'Alerte : Vos flux de trésorerie sont déficitaires sur cette période. Il est crucial d\'auditer vos charges pour rétablir un solde positif.' });
-  if (tips.length === 0) tips.push({ text: 'Votre structure financière est parfaitement calibrée. Vous pouvez envisager d\'accentuer la diversification de votre patrimoine via des supports en actions mondiales (ETF) pour optimiser la rentabilité long terme.' });
+  if (tips.length === 0 && sc.totalInc > 0) tips.push({ text: 'Votre structure financière est parfaitement calibrée. Vous pouvez envisager d\'accentuer la diversification de votre patrimoine via des supports en actions mondiales (ETF) pour optimiser la rentabilité long terme.' });
 
-  recs.innerHTML = tips.map(t => `<div class="tip-card" style="margin-bottom:10px"><div class="tip-content"><p>${t.text}</p></div></div>`).join('');
+  if (recs) {
+    recs.innerHTML = tips.map(t => `<div class="tip-card" style="margin-bottom:12px; padding:18px; border-left:4px solid var(--purple); border-radius:12px;"><div class="tip-content"><p>${t.text}</p></div></div>`).join('');
+  }
 }
-  
-  // Gestion des recommandations
-  //const recs = document.getElementById('recommendations');
-  //const tips = [];
-  //if (sc.totalInc === 0) tips.push({ text: '<strong>Initialisation requise :</strong> Vos tableaux de flux sont vides. Renseignez vos entrées d\'argent dans le module Budget.' });
-  //if (sc.savingsRate < 0.1 && sc.totalInc > 0) tips.push({ text: '<strong>Alerte Rétention :</strong> Votre taux d\'épargne est inférieur à 10%. Il est mathématiquement complexe de bâtir un patrimoine sans un effort d\'épargne structurel. Auditez vos charges discrétionnaires.' });
-  //if (sc.totalAssets < sc.totalExp * 3 && sc.totalExp > 0) tips.push({ text: `<strong>Exposition au Risque :</strong> Votre matelas de sécurité est sous-dimensionné. L'algorithme préconise une couverture minimale de ${fmt(sc.totalExp * 3)} avant de chercher du rendement sur des actifs risqués.` });
-  //if (!state.goals.length) tips.push({ text: '<strong>Déficit de Planification :</strong> Modélisez un projet dans l\'onglet "Projets Cibles". L\'ingénierie financière stipule qu\'un capital sans objectif défini a tendance à être consommé.' });
-  //if (sc.balance < 0 && sc.totalInc > 0) tips.push({ text: '<strong>Alerte Critique (Déficit) :</strong> Vos sorties de liquidités excèdent vos revenus. Corrigez immédiatement cette trajectoire sous peine de destruction rapide de valeur.' });
-  //if (tips.length === 0 && sc.totalInc > 0) tips.push({ text: '<strong>Paramètres Optimaux :</strong> Tous les voyants algorithmiques sont au vert. La prochaine étape consiste à diversifier vos actifs financiers via l\'enveloppe fiscale du PEA (Plan d\'Épargne en Actions).' });
-
-  //if (recs) {
-    //recs.innerHTML = tips.map(t => `<div class="tip-card" style="margin-bottom:12px; padding:18px; border-left:4px solid var(--purple); border-radius:12px;"><div class="tip-content"><p>${t.text}</p></div></div>`).join('');
-  //}
-//}
 
 // ========== INIT ==========
 load();
 renderBudget();
 updateDashboard();
 renderGoals();
-rotateTip(); // Appel immédiat pour afficher le premier conseil
-setInterval(rotateTip, 8000); // Lancement de la rotation
-updateScore(); // Initialisation du score en arrière-plan
+rotateTip(); 
+setInterval(rotateTip, 8000); 
+updateScore(); 
 initRevealer();
 setTimeout(() => { updateInvestChart(); resetReveals('panel-dashboard'); }, 100);
 </script>
