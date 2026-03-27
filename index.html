@@ -418,13 +418,14 @@
       <div class="card js-reveal" style="transition-delay: 0.1s;">
         <div class="card-title">Sorties de trésorerie (Mois)</div>
         <div id="expense-summary" class="empty"><p>Aucun flux sortant détecté.<br>Veuillez paramétrer vos charges.</p></div>
-      </div>
+      </div> 
     </div>
 
     <div class="card js-reveal">
       <div class="card-title">Le saviez-vous ?</div>
       <div id="rotating-tip" class="tip-card" style="border:none;padding:0;background:transparent;">
-        </div>
+        <div class="tip-content"><h4>La règle 50/30/20</h4><p>Allouez 50% de vos revenus aux besoins essentiels, 30% aux dépenses personnelles et 20% à l'épargne. C'est le point de départ idéal pour structurer ses finances.</p></div>
+      </div>
     </div>
   </div>
 
@@ -1017,20 +1018,33 @@ function updateScore() {
     return `<div class="criteria-item"><div class="criteria-label">${c.label}<div style="font-size:11px;color:var(--muted);margin-top:2px;">${c.detail}</div></div><div class="criteria-bar"><div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:${pct}%;background:${barColor}; box-shadow: 0 0 8px ${barColor};"></div></div></div><div class="criteria-score" style="color:${barColor}">${c.val}/${c.max}</div></div>`;
   }).join('');
 
-  // Gestion des recommandations
+  // Recommendations
   const recs = document.getElementById('recommendations');
   const tips = [];
-  if (sc.totalInc === 0) tips.push({ text: '<strong>Initialisation requise :</strong> Vos tableaux de flux sont vides. Renseignez vos entrées d\'argent dans le module Budget.' });
-  if (sc.savingsRate < 0.1 && sc.totalInc > 0) tips.push({ text: '<strong>Alerte Rétention :</strong> Votre taux d\'épargne est inférieur à 10%. Il est mathématiquement complexe de bâtir un patrimoine sans un effort d\'épargne structurel. Auditez vos charges discrétionnaires.' });
-  if (sc.totalAssets < sc.totalExp * 3 && sc.totalExp > 0) tips.push({ text: `<strong>Exposition au Risque :</strong> Votre matelas de sécurité est sous-dimensionné. L'algorithme préconise une couverture minimale de ${fmt(sc.totalExp * 3)} avant de chercher du rendement sur des actifs risqués.` });
-  if (!state.goals.length) tips.push({ text: '<strong>Déficit de Planification :</strong> Modélisez un projet dans l\'onglet "Projets Cibles". L\'ingénierie financière stipule qu\'un capital sans objectif défini a tendance à être consommé.' });
-  if (sc.balance < 0 && sc.totalInc > 0) tips.push({ text: '<strong>Alerte Critique (Déficit) :</strong> Vos sorties de liquidités excèdent vos revenus. Corrigez immédiatement cette trajectoire sous peine de destruction rapide de valeur.' });
-  if (tips.length === 0 && sc.totalInc > 0) tips.push({ text: '<strong>Paramètres Optimaux :</strong> Tous les voyants algorithmiques sont au vert. La prochaine étape consiste à diversifier vos actifs financiers via l\'enveloppe fiscale du PEA (Plan d\'Épargne en Actions).' });
+  if (sc.totalInc === 0) tips.push({ text: 'Afin d\'initier l\'analyse, veuillez enregistrer vos sources de revenus via l\'interface Budget.' });
+  if (sc.savingsRate < 0.1 && sc.totalInc > 0) tips.push({ text: 'Votre taux d\'épargne est inférieur à la norme recommandée de 10%. Une révision de vos postes de dépenses non-essentiels pourrait libérer une marge de manœuvre.' });
+  if (sc.totalAssets < sc.totalExp * 3 && sc.totalExp > 0) tips.push({ text: `La constitution de votre fonds d'urgence n'est pas finalisée. L'objectif sécuritaire est estimé à ${fmt(sc.totalExp * 3)}.` });
+  if (!state.goals.length) tips.push({ text: 'L\'absence de projets définis peut nuire à la discipline financière. La formalisation d\'un objectif cible améliore statistiquement la réussite de l\'épargne.' });
+  if (sc.balance < 0 && sc.totalInc > 0) tips.push({ text: 'Alerte : Vos flux de trésorerie sont déficitaires sur cette période. Il est crucial d\'auditer vos charges pour rétablir un solde positif.' });
+  if (tips.length === 0) tips.push({ text: 'Votre structure financière est parfaitement calibrée. Vous pouvez envisager d\'accentuer la diversification de votre patrimoine via des supports en actions mondiales (ETF) pour optimiser la rentabilité long terme.' });
 
-  if (recs) {
-    recs.innerHTML = tips.map(t => `<div class="tip-card" style="margin-bottom:12px; padding:18px; border-left:4px solid var(--purple); border-radius:12px;"><div class="tip-content"><p>${t.text}</p></div></div>`).join('');
-  }
+  recs.innerHTML = tips.map(t => `<div class="tip-card" style="margin-bottom:10px"><div class="tip-content"><p>${t.text}</p></div></div>`).join('');
 }
+  
+  // Gestion des recommandations
+  //const recs = document.getElementById('recommendations');
+  //const tips = [];
+  //if (sc.totalInc === 0) tips.push({ text: '<strong>Initialisation requise :</strong> Vos tableaux de flux sont vides. Renseignez vos entrées d\'argent dans le module Budget.' });
+  //if (sc.savingsRate < 0.1 && sc.totalInc > 0) tips.push({ text: '<strong>Alerte Rétention :</strong> Votre taux d\'épargne est inférieur à 10%. Il est mathématiquement complexe de bâtir un patrimoine sans un effort d\'épargne structurel. Auditez vos charges discrétionnaires.' });
+  //if (sc.totalAssets < sc.totalExp * 3 && sc.totalExp > 0) tips.push({ text: `<strong>Exposition au Risque :</strong> Votre matelas de sécurité est sous-dimensionné. L'algorithme préconise une couverture minimale de ${fmt(sc.totalExp * 3)} avant de chercher du rendement sur des actifs risqués.` });
+  //if (!state.goals.length) tips.push({ text: '<strong>Déficit de Planification :</strong> Modélisez un projet dans l\'onglet "Projets Cibles". L\'ingénierie financière stipule qu\'un capital sans objectif défini a tendance à être consommé.' });
+  //if (sc.balance < 0 && sc.totalInc > 0) tips.push({ text: '<strong>Alerte Critique (Déficit) :</strong> Vos sorties de liquidités excèdent vos revenus. Corrigez immédiatement cette trajectoire sous peine de destruction rapide de valeur.' });
+  //if (tips.length === 0 && sc.totalInc > 0) tips.push({ text: '<strong>Paramètres Optimaux :</strong> Tous les voyants algorithmiques sont au vert. La prochaine étape consiste à diversifier vos actifs financiers via l\'enveloppe fiscale du PEA (Plan d\'Épargne en Actions).' });
+
+  //if (recs) {
+    //recs.innerHTML = tips.map(t => `<div class="tip-card" style="margin-bottom:12px; padding:18px; border-left:4px solid var(--purple); border-radius:12px;"><div class="tip-content"><p>${t.text}</p></div></div>`).join('');
+  //}
+//}
 
 // ========== INIT ==========
 load();
